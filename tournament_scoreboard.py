@@ -4,7 +4,7 @@
 import secrets
 import tempfile
 
-POINTS = {"win" : 3, "draw": 1, "loss": 0}
+POINTS = {"win": 3, "draw": 1, "loss": 0}
 teams = {}
 matches = []
 
@@ -95,7 +95,6 @@ def table_file_path():
         suffix=".json", delete=False
     ) as temp_file:
         return temp_file.name
-
 
 
 def main():
