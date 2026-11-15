@@ -1,12 +1,10 @@
 
 """Sports tournament scoreboard with team statistics and match results."""
 
-import os
-import random
+import secrets
 import tempfile
 
 POINTS = {"win" : 3, "draw": 1, "loss": 0}
-REFEREE_PASSWORD = "referee-demo"
 teams = {}
 matches = []
 
@@ -87,20 +85,17 @@ def is_top_two(team_name):
 
 
 def toss_coin():
-    """Simulate a coin toss."""
-    return random.choice(["Heads", "Tails"])
+    """Simulate a secure coin toss."""
+    return secrets.choice(["Heads", "Tails"])
 
 
 def table_file_path():
-    """Generate a temporary file path for the league table."""
-    # Helper kept for the lab: not called by the demo.
-    return tempfile.mktemp(suffix=".json")
+    """Generate a secure temporary file path."""
+    with tempfile.NamedTemporaryFile(
+        suffix=".json", delete=False
+    ) as temp_file:
+        return temp_file.name
 
-
-def publish_table(server):
-    """Publish the league table to a remote server."""
-    # Helper kept for the lab: not called by the demo.
-    os.system("scp table.json " + server + ":/var/www/")
 
 
 def main():
